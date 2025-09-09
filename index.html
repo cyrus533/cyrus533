@@ -2,214 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Bundle Purchase</title>
+  <title>Buy Data Bundle</title>
   <style>
-    /* Animated Background */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Glass Effect Form */
-    form {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 440px;
-      width: 100%;
-      margin: 20px auto;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    h2 {
-      text-align: center;
+      padding: 0;
       color: #fff;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
     }
-
+    .container {
+      max-width: 450px;
+      margin: 60px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
     label {
-      font-weight: bold;
       display: block;
       margin-top: 10px;
-      margin-bottom: 5px;
-      color: #fff;
+      text-align: left;
     }
-
-    select, input[type="text"], input[type="file"] {
+    input, select {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 6px;
-      font-size: 14px;
-      background: rgba(255, 255, 255, 0.3);
-      color: #000;
-    }
-
-    #preview {
-      display: none;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    #preview img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: rgba(0, 128, 0, 0.9);
-      color: white;
+      margin-top: 5px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      background: #ff512f;
+      color: white;
       font-size: 16px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
-
     button:hover {
-      background: rgba(0, 100, 0, 0.9);
+      background: #dd2476;
     }
-
-    p.note {
-      background: rgba(255, 255, 255, 0.3);
-      padding: 12px;
-      border-radius: 6px;
+    .note {
       font-size: 14px;
-      color: #000;
-      line-height: 1.5;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      margin-top: 15px;
     }
   </style>
-
-  <script>
-    function updatePrice() {
-      const bundle = document.getElementById("bundle").value;
-      const priceField = document.getElementById("price");
-
-      const prices = {
-        "MTN-1GB": 6,
-        "MTN-2GB": 12,
-        "MTN-3GB": 15,
-        "MTN-4GB": 22,
-        "MTN-5GB": 27,
-        "Vodafone-1GB": 10,
-        "Vodafone-2GB": 20,
-        "Vodafone-3GB": 30,
-        "Vodafone-4GB": 40,
-        "Vodafone-5GB": 50
-      };
-
-      priceField.value = prices[bundle] || "";
-    }
-
-    function previewScreenshot(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const preview = document.getElementById("preview");
-          const img = document.getElementById("previewImg");
-          img.src = e.target.result;
-          preview.style.display = "block";
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function sendToWhatsApp(event) {
-      event.preventDefault();
-
-      const network = document.getElementById("network").value;
-      const bundle = document.getElementById("bundle").value;
-      const price = document.getElementById("price").value;
-      const beneficiary = document.getElementById("beneficiary").value;
-      const screenshot = document.getElementById("screenshot").files[0];
-
-      let message = `📶 New Data Order:%0A%0ANetwork: ${network}%0ABundle: ${bundle}%0APrice: GHS ${price}%0ABeneficiary: ${beneficiary}%0A%0Aℹ️ After payment, bundle will be delivered in 2–25 minutes.%0APlease send money to 0502376541.%0AMTN → Choose Other Networks.%0AVodafone → Send Direct.`;
-
-      const whatsappNumber = "233502376541";
-      
-      if (screenshot) {
-        alert("⚠️ Please remember to attach the payment screenshot manually in WhatsApp after clicking Submit.");
-      }
-
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-    }
-  </script>
 </head>
 <body>
+  <div class="container">
+    <h2>Buy Data Bundle</h2>
+    <form id="bundleForm">
+      <label>Your Phone Number (Beneficiary)</label>
+      <input type="text" id="number" required placeholder="Enter your number">
 
-  <form onsubmit="sendToWhatsApp(event)">
-    <h2>📶 Buy Data Bundle</h2>
-    
-    <label>Network:</label>
-    <select id="network" required>
-      <option value="MTN">MTN</option>
-      <option value="Vodafone">Vodafone</option>
-    </select>
+      <label>Select Bundle</label>
+      <select id="bundle" required>
+        <option value="Vodafone 1GB - GHC10">Vodafone 1GB - GHC10</option>
+        <option value="Vodafone 2GB - GHC18">Vodafone 2GB - GHC18</option>
+        <option value="MTN 1GB - GHC12">MTN 1GB - GHC12</option>
+        <option value="MTN 2GB - GHC20">MTN 2GB - GHC20</option>
+      </select>
 
-    <label>Bundle:</label>
-    <select id="bundle" required onchange="updatePrice()">
-      <optgroup label="MTN">
-        <option value="MTN-1GB">1GB - GHS 6</option>
-        <option value="MTN-2GB">2GB - GHS 12</option>
-        <option value="MTN-3GB">3GB - GHS 15</option>
-        <option value="MTN-4GB">4GB - GHS 22</option>
-        <option value="MTN-5GB">5GB - GHS 27</option>
-      </optgroup>
-      <optgroup label="Vodafone">
-        <option value="Vodafone-1GB">1GB - GHS 10</option>
-        <option value="Vodafone-2GB">2GB - GHS 20</option>
-        <option value="Vodafone-3GB">3GB - GHS 30</option>
-        <option value="Vodafone-4GB">4GB - GHS 40</option>
-        <option value="Vodafone-5GB">5GB - GHS 50</option>
-      </optgroup>
-    </select>
+      <label>Upload Payment Screenshot</label>
+      <input type="file" id="screenshot" accept="image/*" required>
 
-    <label>Price (GHS):</label>
-    <input type="text" id="price" readonly>
+      <button type="submit">Submit</button>
+    </form>
 
-    <label>Beneficiary Number:</label>
-    <input type="text" id="beneficiary" placeholder="Enter number e.g. 0591234567" required>
+    <p class="note">After payment, dial *170# and send money to <b>0502376541</b>.<br>
+    MTN users must choose <b>Other Networks</b>.<br>
+    Vodafone can send directly.<br>
+    Delivery time: <b>2 - 25 minutes</b>.<br>
+    Customer Care: <b>0502376541</b></p>
+  </div>
 
-    <label>Upload Screenshot of Payment:</label>
-    <input type="file" id="screenshot" accept="image/*" onchange="previewScreenshot(event)" required>
+  <script>
+    const BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"; 
+    const CHAT_ID = "8441062430";
 
-    <!-- Preview area -->
-    <div id="preview">
-      <p><b>📸 Screenshot Preview:</b></p>
-      <img id="previewImg" src="" alt="Screenshot Preview">
-    </div>
+    document.getElementById("bundleForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    <p class="note">
-      ℹ️ After payment is confirmed, you will receive your bundle within <b>2–25 minutes</b>.<br><br>
-      Dial <b>*170#</b> and send money to <b>0502376541</b>.<br>
-      MTN → choose <b>Other Networks</b>. Vodafone → send directly.<br><br>
-      📞 Customer Care: <b>0502376541</b>
-    </p>
+      const number = document.getElementById("number").value;
+      const bundle = document.getElementById("bundle").value;
+      const screenshot = document.getElementById("screenshot").files[0];
 
-    <button type="submit">Submit Order</button>
-  </form>
+      const message = `📱 New Bundle Order\n\nBeneficiary: ${number}\nBundle: ${bundle}`;
 
+      // Send text
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+      });
+
+      // Send screenshot
+      if (screenshot) {
+        const formData = new FormData();
+        formData.append("chat_id", CHAT_ID);
+        formData.append("photo", screenshot);
+
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+          method: "POST",
+          body: formData
+        });
+      }
+
+      alert("✅ Order sent! You’ll be contacted shortly.");
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>
